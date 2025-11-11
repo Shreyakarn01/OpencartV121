@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite" thread-count="5" parallel="tests"> <!-- thread-count is used to create multiple locations in the memory so that 
+		we can run multiple test cases in parallel. Give the count between 2 to 5. 
+		Not more than 5 otherwise it becomes unstable -->
+
+	<listeners>
+		<listener class-name="utilities.ExtentReportManager" /> <!-- To generate the extent report using ExtentReportManager class in utilities 
+			package -->
+	</listeners>
+
+
+	<test name="chrometest">
+		<parameter name="os" value="Windows" />
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="testCases.TC001_AccountRegistrationTest" />
+		</classes>
+	</test>
+
+	<test name="edgetest">
+		<parameter name="os" value="Windows" />
+		<parameter name="browser" value="edge" />
+		<classes>
+			<class name="testCases.TC001_AccountRegistrationTest" />
+		</classes>
+	</test>
+</suite>
+<!-- Here we are doing cross-browser/parallel testing which means running 
+	the test case on different browsers parallely, it is done at the end when 
+	all the other kind of testings are completed -->
+<!-- If we don't use parallel keyword in <suite> tag then it will run serially -->
+<!-- The logs will also be generated for each browser and each run -->

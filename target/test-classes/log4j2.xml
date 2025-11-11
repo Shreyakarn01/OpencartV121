@@ -1,0 +1,30 @@
+<Configuration status="INFO">
+
+<Properties>
+<Property name="log-path">./logs</Property>  <!-- ./ specifies current directory and logs folder and name="log-path" is the variable name of this folder that is used in appenders-->
+<Property name="log-pattern">%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</Property>
+</Properties>
+
+<Appenders>
+<Console name="Console" target="SYSTEM_OUT">
+<PatternLayout pattern="${log-pattern}"/>
+</Console>
+
+<RollingFile name="File" fileName="${log-path}/automation.log" filePattern="${log-path}/automation-%d{MM-dd-yyyy}-%i.log.gz">
+<PatternLayout pattern="${log-pattern}"/>
+<Policies>
+<TimeBasedTriggeringPolicy/>
+<SizeBasedTriggeringPolicy size="1MB"/> <!--  Here the file size is specified if the logs exceed this size in that case new log file is created in the logs folder -->
+</Policies>
+<DefaultRolloverStrategy max="10"/>
+</RollingFile>
+</Appenders>
+
+<Loggers>
+<Root level="DEBUG">
+<!-- <AppenderRef ref="Console"/> -->
+<AppenderRef ref="File"/>
+</Root>
+</Loggers>
+
+</Configuration>
